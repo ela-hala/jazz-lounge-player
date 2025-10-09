@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Velvet Airwaves — Jazz Lounge</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --deep: #3b0000;
+      --accent: #991b1b;
+      --gold: #d5b16a;
+      --cream: #f6ece1;
+      --card-w: 750px;
+      --card-h: 230px;
+      --bg: url('https://raw.githubusercontent.com/ela-hala/jazz-lounge-player/main/velvet-bg.jpg');
+    }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: Montserrat, sans-serif;
+      color: var(--cream);
+      background: linear-gradient(rgba(40, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), var(--bg) center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
+      display: flex;
+      gap: 22px;
+      background: rgba(50, 0, 0, 0.35);
+      border: 1px solid rgba(213, 177, 106, 0.35);
+      border-radius: 16px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(6px);
+      padding: 18px 22px;
+      align-items: center;
+      overflow: hidden;
+    }
+
+.left {
+  width: 190px;
+  height: 190px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.5), 0 4px 14px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+  transform-origin: center;
+}
+.art:hover {
+  transform: scale(1.03);
+}
+
+
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--gold);
+      margin: 0;
+      letter-spacing: 0.6px;
+      text-shadow: 0 0 6px rgba(213, 177, 106, 0.45);
+    }
+
+    .meta {
+      font-size: 14px;
+      color: #f9f3e7;
+      opacity: 0.9;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    button.control {
+      background: rgba(210, 170, 100, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--cream);
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-shadow: 0 0 4px rgba(213, 177, 106, 0.4);
+    }
+
+    button.control:hover {
+      background: rgba(210, 170, 100, 0.2);
+      box-shadow: 0 0 10px rgba(213, 177, 106, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .play {
+      background: linear-gradient(180deg, var(--accent), #601010);
+      border: none;
+      box-shadow: 0 0 10px rgba(213, 177, 106, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(213, 177, 106, 0.55);
+    }
+
+    .progress {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), #e3b773);
+      box-shadow: 0 0 8px rgba(213, 177, 106, 0.5);
+    }
+
+    #player {
+      width: 1px;
+      height: 1px;
+      position: absolute;
+      left: -9999px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="region" aria-label="Jazz lounge music player">
+    <div class="left">
+      <div id="art" class="art" style="background-image:url('REPLACE_BG_URL');"></div>
+    </div>
+
+    <div class="right">
+      <h1>Velvet Airwaves</h1>
+      <div class="meta">
+        <div id="track-title">Playlist: Velvet Airwaves</div>
+        <div class="small" id="track-info">A custom lounge playlist</div>
+      </div>
+
+      <div class="controls">
+        <button class="control" id="prev">⟵</button>
+        <button class="control play" id="play">▶</button>
+        <button class="control" id="next">⟶</button>
+        <div style="flex:1;"></div>
+        <div style="width:110px;">
+          <input id="vol" type="range" min="0" max="100" step="1" value="50">
+        </div>
+      </div>
+
+      <div class="progress" id="progress">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="player"></div>
+
+  <script>
+    const PLAYLIST_ID = 'PL_DUbnZPH5bh5yNbJZB3OnF2VT1O2No8J';
+    const FALLBACK_BG = 'https://raw.githubusercontent.com/ela-hala/jazz-lounge-player/main/velvet-bg.jpg';
+
+    const art = document.getElementById('art');
+    const playBtn = document.getElementById('play');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const vol = document.getElementById('vol');
+    const titleEl = document.getElementById('track-title');
+    const infoEl = document.getElementById('track-info');
+    const progress = document.getElementById('progress');
+    const progressBar = document.getElementById('progress-bar');
+
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '0', width: '0',
+        playerVars: { listType: 'playlist', list: PLAYLIST_ID, autoplay: 0, controls: 0, rel: 0, modestbranding: 1, iv_load_policy: 3 },
+        events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
+      });
+    }
+
+    function onPlayerReady() {
+      try { player.setVolume(50); } catch(e) {}
+      updateTrackInfo();
+      setInterval(updateProgressUI, 350);
+    }
+
+    function onPlayerStateChange() {
+      updateTrackInfo();
+      const state = player.getPlayerState();
+      playBtn.textContent = (state === YT.PlayerState.PLAYING) ? '❚❚' : '▶';
+    }
+
+    function updateTrackInfo() {
+      if (!player || !player.getVideoData) return;
+      const data = player.getVideoData() || {};
+      const vid = data.video_id || null;
+      titleEl.textContent = data.title || 'Velvet Airwaves';
+      infoEl.textContent = vid ? `Now playing • ${data.author || ''}` : 'Playlist';
+      art.style.backgroundImage = vid
+        ? `url('https://i.ytimg.com/vi/${vid}/hqdefault.jpg')`
+        : `url('${FALLBACK_BG}')`;
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (!player) return;
+      const state = player.getPlayerState();
+      (state === YT.PlayerState.PLAYING) ? player.pauseVideo() : player.playVideo();
+    });
+    prevBtn.addEventListener('click', () => player && player.previousVideo());
+    nextBtn.addEventListener('click', () => player && player.nextVideo());
+    vol.addEventListener('input', e => player && player.setVolume(Number(e.target.value)));
+
+    progress.addEventListener('click', e => {
+      if (!player || !player.getDuration) return;
+      const rect = progress.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      player.seekTo(player.getDuration() * pct, true);
+    });
+
+    function updateProgressUI() {
+      if (!player || !player.getDuration) return;
+      const pct = (player.getCurrentTime() / player.getDuration()) * 100;
+      progressBar.style.width = `${pct}%`;
+    }
+
+    document.addEventListener('keydown', ev => {
+      if (ev.code === 'Space') { ev.preventDefault(); playBtn.click(); }
+      if (ev.key === 'ArrowRight') nextBtn.click();
+      if (ev.key === 'ArrowLeft') prevBtn.click();
+    });
+  </script>
+</body>
+</html>
+
