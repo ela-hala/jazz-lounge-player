@@ -68,13 +68,11 @@
   border-radius: 12px;
   transition: transform 0.4s ease;
   transform-origin: center;
-  /* 💡 Force crop to hide YouTube letterbox bars */
-  background-color: #000;
-  background-size: 150%; /* zooms in slightly */
 }
 .art:hover {
   transform: scale(1.03);
 }
+
 
     .right {
       flex: 1;
@@ -246,7 +244,8 @@
       const vid = data.video_id || null;
       titleEl.textContent = data.title || 'Velvet Airwaves';
       infoEl.textContent = vid ? `Now playing • ${data.author || ''}` : 'Playlist';
-      art.style.backgroundImage = `url('https://img.youtube.com/vi/${vid}/mqdefault.jpg')`;
+      art.style.backgroundImage = vid
+        ? `url('https://i.ytimg.com/vi/${vid}/hqdefault.jpg')`
         : `url('${FALLBACK_BG}')`;
     }
 
@@ -280,6 +279,3 @@
   </script>
 </body>
 </html>
-
-
-
