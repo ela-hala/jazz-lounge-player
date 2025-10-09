@@ -10,8 +10,8 @@
   <style>
     :root {
       --deep: #3b0000;
-      --accent: #8f1818;
-      --gold: #cda768;
+      --accent: #991b1b;
+      --gold: #d5b16a;
       --cream: #f6ece1;
       --card-w: 750px;
       --card-h: 230px;
@@ -23,35 +23,39 @@
       height: 100%;
       font-family: Montserrat, sans-serif;
       color: var(--cream);
-      background: linear-gradient(rgba(30, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-        var(--bg) center/cover no-repeat;
-      -webkit-font-smoothing: antialiased;
+      background: linear-gradient(rgba(40, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), var(--bg) center/cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
+      -webkit-font-smoothing: antialiased;
     }
 
     .card {
       width: var(--card-w);
       height: var(--card-h);
       display: flex;
-      gap: 20px;
-      background: rgba(60, 10, 10, 0.35);
-      border: 1px solid rgba(205, 167, 104, 0.25);
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
-      border-radius: 14px;
-      padding: 16px 20px;
-      backdrop-filter: blur(4px);
+      gap: 22px;
+      background: rgba(50, 0, 0, 0.35);
+      border: 1px solid rgba(213, 177, 106, 0.35);
+      border-radius: 16px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(6px);
+      padding: 18px 22px;
       align-items: center;
+      overflow: hidden;
     }
 
     .left {
-      width: 230px;
-      height: 100%;
-      border-radius: 10px;
+      width: 190px;
+      height: 190px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.25));
+      flex-shrink: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.3));
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.5), 0 4px 14px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .art {
@@ -59,10 +63,11 @@
       height: 100%;
       background-size: cover;
       background-position: center;
-      transition: transform 0.35s ease;
+      border-radius: 10px;
+      transition: transform 0.4s ease;
     }
     .art:hover {
-      transform: scale(1.04);
+      transform: scale(1.03);
     }
 
     .right {
@@ -78,6 +83,7 @@
       color: var(--gold);
       margin: 0;
       letter-spacing: 0.6px;
+      text-shadow: 0 0 6px rgba(213, 177, 106, 0.45);
     }
 
     .meta {
@@ -94,40 +100,44 @@
     }
 
     button.control {
-      background: rgba(200, 150, 80, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(210, 170, 100, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       color: var(--cream);
       padding: 8px 10px;
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
       transition: all 0.25s ease;
+      text-shadow: 0 0 4px rgba(213, 177, 106, 0.4);
     }
+
     button.control:hover {
-      background: rgba(200, 150, 80, 0.2);
+      background: rgba(210, 170, 100, 0.2);
+      box-shadow: 0 0 10px rgba(213, 177, 106, 0.3);
       transform: translateY(-2px);
     }
 
     .play {
-      background: linear-gradient(180deg, var(--accent), #5a0c0c);
+      background: linear-gradient(180deg, var(--accent), #601010);
       border: none;
-      box-shadow: 0 3px 10px rgba(127, 18, 18, 0.4);
+      box-shadow: 0 0 10px rgba(213, 177, 106, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     input[type=range] {
       -webkit-appearance: none;
       width: 100%;
       height: 6px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 6px;
     }
+
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none;
       width: 14px;
       height: 14px;
       background: var(--gold);
       border-radius: 50%;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 6px rgba(213, 177, 106, 0.55);
     }
 
     .progress {
@@ -138,10 +148,12 @@
       cursor: pointer;
       margin-top: 6px;
     }
+
     .progress-bar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--gold), #e0a96f);
+      background: linear-gradient(90deg, var(--gold), #e3b773);
+      box-shadow: 0 0 8px rgba(213, 177, 106, 0.5);
     }
 
     #player {
